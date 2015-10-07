@@ -14,25 +14,25 @@
 @interface CustomeCollectionViewLayout ()
 
 //section的数量
-@property (nonatomic) NSInteger numberOfSections;
+@property (assign, nonatomic) NSInteger numberOfSections;
 
 //section中Cell的数量
-@property (nonatomic) NSInteger numberOfCellsInSections;
+@property (assign, nonatomic) NSInteger numberOfCellsInSections;
 
 //瀑布流的行数
-@property (nonatomic) NSInteger columnCount;
+@property (assign, nonatomic) NSInteger columnCount;
 
 //cell边距
-@property (nonatomic) NSInteger margin;
+@property (assign, nonatomic) NSInteger margin;
 
 //cell的最小高度
-@property (nonatomic) NSInteger cellMinHeight;
+@property (assign, nonatomic) NSInteger cellMinHeight;
 
 //cell的最大高度，最大高度比最小高度小，以最小高度为准
-@property (nonatomic) NSInteger cellMaxHeight;
+@property (assign, nonatomic) NSInteger cellMaxHeight;
 
 //cell的宽度
-@property (nonatomic) CGFloat cellWidth;
+@property (assign, nonatomic) CGFloat cellWidth;
 
 //存储每列Cell的X坐标
 @property (strong, nonatomic) NSMutableArray *cellXArray;
@@ -60,7 +60,6 @@
     [self initCellWidth];
     
     [self initCellHeight];
-    
 }
 
 
