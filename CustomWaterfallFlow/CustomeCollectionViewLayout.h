@@ -15,35 +15,35 @@
  * 确定布局行数的回调
  */
 @required
-- (NSInteger) numberOfColumnWithCollectionView: (UICollectionView *)collectionView
-        collectionViewLayout:( CustomeCollectionViewLayout *)collectionViewLayout;
+- (NSInteger)numberOfColumnWithCollectionView:(UICollectionView *)collectionView
+                          collectionViewLayout:( CustomeCollectionViewLayout *)collectionViewLayout;
 
 /**
  * 确定cell的Margin
  */
 @required
-- (CGFloat) marginOfCellWithCollectionView: (UICollectionView *)collectionView
-                          collectionViewLayout:( CustomeCollectionViewLayout *)collectionViewLayout;
+- (CGFloat)marginOfCellWithCollectionView:(UICollectionView *)collectionView
+                     collectionViewLayout:( CustomeCollectionViewLayout *)collectionViewLayout;
 /**
  * 确定cell的最小高度
  */
 @required
-- (CGFloat) minHeightOfCellWithCollectionView: (UICollectionView *)collectionView
-                         collectionViewLayout:( CustomeCollectionViewLayout *)collectionViewLayout;
+- (CGFloat)minHeightOfCellWithCollectionView:(UICollectionView *)collectionView
+                        collectionViewLayout:( CustomeCollectionViewLayout *)collectionViewLayout;
 
 /**
  * 确定cell的最大高度
  */
 @required
-- (CGFloat) maxHeightOfCellWithCollectionView: (UICollectionView *)collectionView
-                         collectionViewLayout:( CustomeCollectionViewLayout *)collectionViewLayout;
+- (CGFloat)maxHeightOfCellWithCollectionView:(UICollectionView *)collectionView
+                        collectionViewLayout:( CustomeCollectionViewLayout *)collectionViewLayout;
 
 @end
 
 
 @interface CustomeCollectionViewLayout : UICollectionViewLayout
 
-@property (assign, nonatomic) id<CustomeCollectionViewLayoutDelegate> layoutDelegate;
+@property (weak, nonatomic) id<CustomeCollectionViewLayoutDelegate> layoutDelegate;
 
 @end
 

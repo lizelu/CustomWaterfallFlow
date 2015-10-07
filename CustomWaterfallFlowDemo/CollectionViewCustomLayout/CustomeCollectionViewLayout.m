@@ -52,7 +52,7 @@
 /**
  * 该方法是预加载layout, 只会被执行一次
  */
-- (void)prepareLayout{
+- (void)prepareLayout {
     [super prepareLayout];
     
     [self initData];
@@ -67,7 +67,7 @@
 /**
  * 该方法返回CollectionView的ContentSize的大小
  */
-- (CGSize)collectionViewContentSize{
+- (CGSize)collectionViewContentSize {
     
     CGFloat height = [self maxCellYArrayWithArray:_cellYArray];
     
@@ -77,42 +77,33 @@
 /**
  * 该方法为每个Cell绑定一个Layout属性~
  */
-- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
-{
+- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
     
     [self initCellYArray];
     
     NSMutableArray *array = [NSMutableArray array];
     
     //add cells
-    for (int i=0; i < _numberOfCellsInSections; i++)
-    {
+    for (int i=0; i < _numberOfCellsInSections; i++){
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
-        
         UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:indexPath];
-        
         [array addObject:attributes];
     }
     
     return array;
-    
 }
 
 /**
  * 该方法为每个Cell绑定一个Layout属性~
  */
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath{
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     
     CGRect frame = CGRectZero;
-    
     CGFloat cellHeight = [_cellHeightArray[indexPath.row] floatValue];
-    
     NSInteger minYIndex = [self minCellYArrayWithArray:_cellYArray];
-    
     CGFloat tempX = [_cellXArray[minYIndex] floatValue];
-    
     CGFloat tempY = [_cellYArray[minYIndex] floatValue];
     
     frame = CGRectMake(tempX, tempY, _cellWidth, cellHeight);
@@ -127,51 +118,52 @@
 }
 
 
+#pragma mark -- 自定义方法
 /**
  * 初始化相关数据
  */
-- (void) initData{
+- (void)initData {
     _numberOfSections = [self.collectionView numberOfSections];
     _numberOfCellsInSections = [self.collectionView numberOfItemsInSection:0];
     
     //通过回调获取列数
-    _columnCount = [_layoutDelegate numberOfColumnWithCollectionView:self.collectionView collectionViewLayout:self];
+    _columnCount = [_layoutDelegate numberOfColumnWithCollectionView:self.collectionView
+                                                collectionViewLayout:self];
     
-    _margin = [_layoutDelegate marginOfCellWithCollectionView:self.collectionView collectionViewLayout:self];
+    _margin = [_layoutDelegate marginOfCellWithCollectionView:self.collectionView
+                                         collectionViewLayout:self];
     
-    _cellMinHeight = [_layoutDelegate minHeightOfCellWithCollectionView:self.collectionView collectionViewLayout:self];
+    _cellMinHeight = [_layoutDelegate minHeightOfCellWithCollectionView:self.collectionView
+                                                   collectionViewLayout:self];
     
-    _cellMaxHeight = [_layoutDelegate maxHeightOfCellWithCollectionView:self.collectionView collectionViewLayout:self];
+    _cellMaxHeight = [_layoutDelegate maxHeightOfCellWithCollectionView:self.collectionView
+                                                   collectionViewLayout:self];
 }
 
 /**
  * 根据Cell的列数求出Cell的宽度
  */
-- (void) initCellWidth{
+- (void)initCellWidth {
     //计算每个Cell的宽度
     _cellWidth = (SCREEN_WIDTH - (_columnCount -1) * _margin) / _columnCount;
-    
+
     //为每个Cell计算X坐标
     _cellXArray = [[NSMutableArray alloc] initWithCapacity:_columnCount];
     for (int i = 0; i < _columnCount; i ++) {
-        
         CGFloat tempX = i * (_cellWidth + _margin);
-        
         [_cellXArray addObject:@(tempX)];
     }
-
 }
 
 /**
  * 随机生成Cell的高度
  */
-- (void) initCellHeight{
+- (void)initCellHeight {
     //随机生成Cell的高度
     _cellHeightArray = [[NSMutableArray alloc] initWithCapacity:_numberOfCellsInSections];
+    
     for (int i = 0; i < _numberOfCellsInSections; i ++) {
-        
         CGFloat cellHeight = arc4random() % _cellMaxHeight + _cellMinHeight;
-        
         [_cellHeightArray addObject:@(cellHeight)];
     }
 
@@ -180,8 +172,7 @@
 /**
  * 初始化每列Cell的Y轴坐标
  */
-
-- (void) initCellYArray{
+- (void) initCellYArray {
     _cellYArray = [[NSMutableArray alloc] initWithCapacity:_columnCount];
     
     for (int i = 0; i < _columnCount; i ++) {
@@ -193,7 +184,7 @@
 /**
  * 求CellY数组中的最大值并返回
  */
-- (CGFloat) maxCellYArrayWithArray: (NSMutableArray *) array{
+- (CGFloat)maxCellYArrayWithArray:(NSMutableArray *) array {
     if (array.count == 0) {
         return 0.0f;
     }
@@ -202,7 +193,6 @@
     for (NSNumber *number in array) {
         
         CGFloat temp = [number floatValue];
-        
         if (max < temp) {
             max = temp;
         }
@@ -215,7 +205,7 @@
 /**
  * 求CellY数组中的最小值的索引
  */
-- (CGFloat) minCellYArrayWithArray: (NSMutableArray *) array{
+- (CGFloat)minCellYArrayWithArray:(NSMutableArray *) array {
     
     if (array.count == 0) {
         return 0.0f;
